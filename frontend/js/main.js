@@ -11,7 +11,7 @@ import { renderRecipeCard, clearRecipesList } from "./ui.js"
 // Elle charge et affiche toutes les recettes
 
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("Application chargée")
+	// console.log("Application chargée")
 	loadRecipes()
 	setupEventListeners()
 })
@@ -26,6 +26,8 @@ const loadRecipes = async () => {
 	try {
 		// 1. Appeler l'API pour récupérer toutes les recettes
 		const recipes = await getAllRecipes()
+
+		// console.log("Recettes chargées:", recipes)
 
 		// 2. Afficher les recettes dans la grid
 		displayRecipes(recipes)
@@ -43,6 +45,7 @@ const loadRecipes = async () => {
 // Fonction fournie - génère le HTML pour toutes les recettes
 
 const displayRecipes = (recipes) => {
+	console.log("Affichage des recettes...")
 	// Récupérer le conteneur où afficher les recettes
 	const recipesContainer = document.getElementById("recipes-container")
 
@@ -65,6 +68,7 @@ const displayRecipes = (recipes) => {
 	recipes.forEach((recipe) => {
 		const cardHTML = renderRecipeCard(recipe)
 		recipesContainer.innerHTML += cardHTML
+		console.log("Recette:", recipe)
 	})
 }
 

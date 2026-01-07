@@ -21,16 +21,16 @@
 export const renderRecipeCard = (recipe) => {
 	// Extraire et formater les ingrédients (prendre les 3 premiers)
 	const ingredientsList = recipe.ingredients
-		.split("\n")
+
 		.filter((ing) => ing.trim() !== "")
 		.slice(0, 3)
 		.map((ing) => `<li class="text-muted small">${ing.trim()}</li>`)
 		.join("")
 
 	// Calculer le nombre d'ingrédients restants
-	const totalIngredients = recipe.ingredients
-		.split("\n")
-		.filter((ing) => ing.trim() !== "").length
+	const totalIngredients = recipe.ingredients.filter(
+		(ing) => ing.trim() !== ""
+	).length
 	const remainingIngredients = totalIngredients - 3
 
 	// Tronquer les instructions si trop longues
