@@ -45,7 +45,6 @@ const loadRecipes = async () => {
 // Fonction fournie - génère le HTML pour toutes les recettes
 
 const displayRecipes = (recipes) => {
-	console.log("Affichage des recettes...")
 	// Récupérer le conteneur où afficher les recettes
 	const recipesContainer = document.getElementById("recipes-container")
 

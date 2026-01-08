@@ -9,8 +9,8 @@ const loadRecipe = async (recipeId) => {
 		// 1. Appeler l'API pour récupérer la recette par son ID
 		// const recipe = await getOneRecipe(recipeId)
 
-        // Mock de recette pour test sans backend
-        // TODO: Supprimer cette ligne quand l'API sera fonctionnelle
+		// Mock de recette pour test sans backend
+		// TODO: Supprimer cette ligne quand l'API sera fonctionnelle
 		const recipe = {
 			id: 1,
 			name: "Ratatouille Provençale",
@@ -75,3 +75,35 @@ document.addEventListener("DOMContentLoaded", () => {
 	loadRecipe("1")
 	setupEventListeners()
 })
+
+// ============================================
+// AFFICHER LES RECETTES DANS LA GRID
+// ============================================
+// Fonction fournie - génère le HTML pour toutes les recettes
+
+const displayRecipes = (recipes) => {
+	// Récupérer le conteneur où afficher les recettes
+	const recipesContainer = document.getElementById("recipes-container")
+
+	// Vider le conteneur avant d'ajouter les nouvelles recettes
+	clearRecipesList(recipesContainer)
+
+	// Si aucune recette, afficher un message
+	if (recipes.length === 0) {
+		recipesContainer.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    Aucune recette disponible. Ajoutez-en une !
+                </div>
+            </div>
+        `
+		return
+	}
+
+	// Générer et afficher chaque recette
+	recipes.forEach((recipe) => {
+		const cardHTML = renderRecipeCard(recipe)
+		recipesContainer.innerHTML += cardHTML
+		console.log("Recette:", recipe)
+	})
+}
