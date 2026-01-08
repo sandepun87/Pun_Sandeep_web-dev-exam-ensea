@@ -81,29 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================================
 // Fonction fournie - génère le HTML pour toutes les recettes
 
-const displayRecipes = (recipes) => {
+const displaySingleRecipe = (recipe) => {
 	// Récupérer le conteneur où afficher les recettes
-	const recipesContainer = document.getElementById("recipes-container")
+	const recipesDetails = document.getElementById("recipe-detail")
 
 	// Vider le conteneur avant d'ajouter les nouvelles recettes
-	clearRecipesList(recipesContainer)
+	clearRecipesList(recipesDetails)
 
-	// Si aucune recette, afficher un message
-	if (recipes.length === 0) {
-		recipesContainer.innerHTML = `
+	// Si il n'y a pas de recette, afficher un message
+	if (!recipe) {
+		recipesDetails.innerHTML = `
             <div class="col-12">
                 <div class="alert alert-info text-center" role="alert">
-                    Aucune recette disponible. Ajoutez-en une !
+                    Recette non-disponible. Veuillez revenir plus tard !
                 </div>
             </div>
         `
 		return
 	}
 
-	// Générer et afficher chaque recette
-	recipes.forEach((recipe) => {
-		const cardHTML = renderRecipeCard(recipe)
-		recipesContainer.innerHTML += cardHTML
-		console.log("Recette:", recipe)
-	})
+	renderSingleRecipe(recipe)
 }
