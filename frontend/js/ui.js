@@ -194,74 +194,70 @@ export const renderSingleRecipe = (recipe) => {
 				</div>
 			<img src="https://images.pexels.com/photos/5190684/pexels-photo-5190684.jpeg" class="card-img-top" alt="NOM DE LA RECETTE" style="max-height: 300px; object-fit: cover;">
 			
-			<div class="row">
-									<!-- Ingrédients -->
-									<div class="col-md-5 mb-4">
-										<h4 class="mb-3">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="20"
-												height="20"
-												fill="currentColor"
-												class="bi bi-list-ul me-2"
-												viewBox="0 0 16 16"
-											>
-												<path
-													fill-rule="evenodd"
-													d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
-												/>
-											</svg>
-											Ingrédients
-										</h4>
-										<div class="bg-light p-3 rounded">
-											<ul class="list-unstyled mb-0" id="recipe-ingredients">
-												<!-- Les ingrédients seront insérés ici -->
-											</ul>
-										</div>
-									</div>
+			<div class="card-body p-4">
+				<div class="row">
+					<!-- Ingrédients -->
+					<div class="col-md-5 mb-4">
+						<h4 class="mb-3">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								fill="currentColor"
+								class="bi bi-list-ul me-2"
+								viewBox="0 0 16 16"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+								/>
+							</svg>
+							Ingrédients
+						</h4>
+						<div class="bg-light p-3 rounded">
+							<ul class="list-unstyled mb-0">							
+								${recipe.ingredients
+									.map(
+										(ingredient) =>
+											`<li  class="text-muted small fst-italic">${ingredient}</li>`
+									)
+									.join("")}
+									
+									</ul>
+						</div>
+					</div>
 
-									<!-- Instructions -->
-									<div class="col-md-7 mb-4">
-										<h4 class="mb-3">
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="20"
-												height="20"
-												fill="currentColor"
-												class="bi bi-journal-text me-2"
-												viewBox="0 0 16 16"
-											>
-												<path
-													d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"
-												/>
-												<path
-													d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"
-												/>
-												<path
-													d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"
-												/>
-											</svg>
-											Instructions
-										</h4>
-										<div class="bg-light p-3 rounded">
-											<p class="mb-0 text-pre-wrap" id="recipe-instructions">
-												<!-- Les instructions seront insérées ici -->
-											</p>
-										</div>
-									</div>
-								</div>
-			
 
-			<ul class="list-unstyled mb-0">							
-			${recipe.ingredients
-				.map(
-					(ingredient) =>
-						`<li  class="text-muted small fst-italic">${ingredient}</li>`
-				)
-				.join("")}
-				
-				</ul>
-
+					<div class="col-md-7 mb-4">
+						<h4 class="mb-3">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								fill="currentColor"
+								class="bi bi-journal-text me-2"
+								viewBox="0 0 16 16"
+							>
+								<path
+									d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"
+								/>
+								<path
+									d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"
+								/>
+								<path
+									d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"
+								/>
+							</svg>
+							Instructions
+						</h4>
+						<div class="bg-light p-3 rounded">
+							<p class="mb-0 text-pre-wrap" id="recipe-instructions">${
+								recipe.instructions
+							}</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	`
