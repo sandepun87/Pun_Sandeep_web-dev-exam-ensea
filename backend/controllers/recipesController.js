@@ -30,7 +30,15 @@ export const getRecipes = (req, res) => {
 
 export const getRecipeById = (req, res) => {
 	try {
-		// Votre code ici
+		const recipes = readRecipes(recipesPath)
+		const id = parseInt(req.params.id)
+		const recipe = recipes.find((r) => r.id === id)
+		
+		if (!recipe) {
+			return res.status(404).json({ error: "Recette non trouvée" })
+		}
+		
+		res.json(recipe)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
@@ -47,11 +55,15 @@ export const getRecipeById = (req, res) => {
 //    Conseil: utilisez l'opérateur spread { id: Date.now(), ...req.body }
 // 3. Ajouter la nouvelle recette au tableau de recettes (utilisez .push())
 // 4. Sauvegarder le tableau modifié avec writeRecipes(recipesPath, recipes)
-// 5. Renvoyer la recette créée avec le status 201 (Created)
+// 5. Renvoyer la recette créée avec le status 202 (Created)
 
 export const createRecipe = (req, res) => {
 	try {
-		// Votre code ici
+		const recipes = readRecipes(recipesPath)
+		const newRecipe = { id: Date.now(), ...req.body }
+		recipes.push(newRecipe)
+		writeRecipes(recipesPath, recipes)
+		res.status(201).json(newRecipe)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
@@ -73,7 +85,17 @@ export const createRecipe = (req, res) => {
 
 export const updateRecipe = (req, res) => {
 	try {
-		// Votre code ici
+		const recipes = readRecipes(recipesPath)
+		const id = parseInt(req.params.id)
+		const index = recipes.findIndex((r) => r.id === id)
+		
+		if (index === -1) {
+			return res.status(404).json({ error: "Recette non trouvée" })
+		}
+		
+		recipes[index] = { ...recipes[index], ...req.body, id }
+		writeRecipes(recipesPath, recipes)
+		res.json(recipes[index])
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
@@ -94,7 +116,17 @@ export const updateRecipe = (req, res) => {
 
 export const deleteRecipe = (req, res) => {
 	try {
-		// Votre code ici
+		const recipes = readRecipes(recipesPath)
+		const id = parseInt(req.params.id)
+		const index = recipes.findIndex((r) => r.id === id)
+		
+		if (index === -1) {
+			return res.status(404).json({ error: "Recette non trouvée" })
+		}
+		
+		recipes.splice(index, 1)
+		writeRecipes(recipesPath, recipes)
+		res.json({ message: "Recette supprimée avec succès" })
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
@@ -114,7 +146,17 @@ export const deleteRecipe = (req, res) => {
 
 export const searchRecipes = (req, res) => {
 	try {
-		// Votre code ici (BONUS)
+		const recipes = readRecipes(recipesPath)
+		const { search } = req.query
+		
+		if (!search) {
+			return res.json(recipes)
+		}
+		
+		const filtered = recipes.filter((r) =>
+			r.name.toLowerCase().includes(search.toLowerCase())
+		)
+		res.json(filtered)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
